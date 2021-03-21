@@ -1,0 +1,170 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>All Posts - Hai-Blog</title>
+        <link>https://sanhobk.github.io/posts/</link>
+        <description>All Posts | Hai-Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>sanhobkna@gmail.com (HaiNguyen)</managingEditor>
+            <webMaster>sanhobkna@gmail.com (HaiNguyen)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 21 Mar 2021 06:53:26 &#43;0700</lastBuildDate><atom:link href="https://sanhobk.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Chuyển file Excel thành file CSV sử dụng pandas</title>
+    <link>https://sanhobk.github.io/convert/</link>
+    <pubDate>Sun, 21 Mar 2021 06:53:26 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://sanhobk.github.io/convert/</guid>
+    <description><![CDATA[<h2 id="chuyn-file-excel-thnh-file-csv-s-dng-pandas">Chuyển file Excel thành file CSV sử dụng pandas</h2>
+<p>Bạn có thể dễ dàng đọc một file Excel bằng python sử dụng thư viện pandas. Pandas là bộ công cụ phân tích và xử lý dữ liệu rất mạnh mẽ, nó được sử dụng rộng rãi trong cả nghiên cứu lẫn phát triển các ứng dụng về khoa học dữ liệu. Để đạt được mục tiêu ở đầu bài, chúng ta sẽ sử dụng các hàm xử lý có trong pandas.
+Đầu tiên, hãy cài đặt thư viện pandas, bạn nên cài pandas version 1.2.0 trở lên để tránh một số lỗi không cần thiết, máy mình sử dụng pandas 1.0 đã gặp một số lỗi, update lên thì ok:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pip</span> <span class="n">install</span> <span class="n">pandas</span><span class="o">==</span><span class="mf">1.2</span><span class="o">.</span><span class="mi">0</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Để đọc một file excel ta sử dụng hàm read_excel, dưới đây là đoạn mã mẫu đọc một file excel bất kỳ:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;</span><span class="s1">path_to_file/file_name.xlsx</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="c1"># in ra những gì có trong file excel</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Để chuyển một file excel thành một file csv ta sử dụng hàm to_csv:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="n">read_file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span> <span class="p">(</span><span class="sa">r</span><span class="s1">&#39;</span><span class="s1">path_to_file/file_name.xlsx</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">read_file</span><span class="o">.</span><span class="n">to_csv</span> <span class="p">(</span><span class="sa">r</span><span class="s1">&#39;</span><span class="s1">path_to_file/file_name_new.csv</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Tool chuyển đổi file excel sang file csv:
+Bằng những công cụ ở trên mình đã tạo ra một tool chuyển đổi file excel sang file csv, bạn có thể tham khảo đoạn mã dưới đây:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">tkinter</span> <span class="kn">as</span> <span class="nn">tk</span>  
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">filedialog</span>  
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">messagebox</span>  
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>  
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageTk</span><span class="p">,</span><span class="n">Image</span>  
+  
+<span class="n">root</span><span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">(</span><span class="p">)</span>  
+<span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="o">=</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Hai</span><span class="s2">&#39;</span><span class="s2">s tool conversion</span><span class="s2">&#34;</span><span class="p">)</span>  
+<span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">520x450+100+50</span><span class="s2">&#34;</span><span class="p">)</span>  
+<span class="n">root</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span><span class="bp">False</span><span class="p">)</span>  
+  
+<span class="n">title</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Hai</span><span class="s2">&#39;</span><span class="s2">s Tool to Convert Excel files to CSV files</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">arial</span><span class="s2">&#34;</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">bold</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">#002431</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">yellow</span><span class="s1">&#39;</span><span class="p">)</span>  
+<span class="n">title</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">relwidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  
+<span class="n">img</span> <span class="o">=</span> <span class="n">ImageTk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">convert.png</span><span class="s1">&#39;</span><span class="p">)</span>  
+<span class="n">image_bg</span><span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span> <span class="n">img</span><span class="p">)</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">relwidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  
+  
+<span class="k">def</span> <span class="nf">getExcel</span> <span class="p">(</span><span class="p">)</span><span class="p">:</span>  
+    <span class="k">global</span> <span class="n">read_file</span>  
+      
+    <span class="n">import_file_path</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askopenfilename</span><span class="p">(</span><span class="p">)</span>  
+    <span class="n">read_file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span> <span class="p">(</span><span class="n">import_file_path</span><span class="p">)</span>  
+      
+<span class="n">import_button_excel</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">      Import Excel File     </span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">getExcel</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">blue</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">white</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">consolas</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">bold</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span>  
+<span class="n">import_button_excel</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>  
+  
+<span class="k">def</span> <span class="nf">convertToCSV</span> <span class="p">(</span><span class="p">)</span><span class="p">:</span>  
+    <span class="k">global</span> <span class="n">read_file</span>  
+      
+    <span class="n">export_file_path</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">asksaveasfilename</span><span class="p">(</span><span class="n">defaultextension</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">.csv</span><span class="s1">&#39;</span><span class="p">)</span>  
+    <span class="n">read_file</span><span class="o">.</span><span class="n">to_csv</span> <span class="p">(</span><span class="n">export_file_path</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  
+  
+<span class="n">convert_csv</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Convert Excel to CSV</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">convertToCSV</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">green</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">white</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">consolas</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">bold</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span>  
+<span class="n">convert_csv</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">310</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>  
+  
+<span class="n">exit_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Exit</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">consolas</span><span class="s2">&#34;</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">bold</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">red</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">white</span><span class="s2">&#34;</span><span class="p">)</span>  
+<span class="n">exit_button</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span> <span class="mi">370</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>  
+  
+  
+<span class="n">root</span><span class="o">.</span><span class="n">mainloop</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Thành quả:</p>
+<p></p>
+<p>Bạn có thể tải tool về dùng thử  bằng link sau:</p>
+<p><a href="https://drive.google.com/file/d/17XO0Vi6f6bj4tnDiaarqkyFSejZn3IKJ/view?usp=sharing" target="_blank" rel="noopener noreffer">Link_download_tool</a></p>
+<p>giải nén, và chạy file gui1.exe</p>]]></description>
+</item><item>
+    <title>Tổng Quan Về Neural Network</title>
+    <link>https://sanhobk.github.io/ann/</link>
+    <pubDate>Fri, 25 Dec 2020 07:35:39 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://sanhobk.github.io/ann/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>YOLO Và Các Thuật toán Object Detection</title>
+    <link>https://sanhobk.github.io/objectdetectionyolo/</link>
+    <pubDate>Mon, 07 Dec 2020 23:01:17 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://sanhobk.github.io/objectdetectionyolo/</guid>
+    <description><![CDATA[Tìm hiểu các thuật toán Object Detection, cụ thể với YOLO]]></description>
+</item><item>
+    <title>Ứng Dụng Phân Loại Các Giống Chó, Mèo</title>
+    <link>https://sanhobk.github.io/classification/</link>
+    <pubDate>Mon, 02 Nov 2020 02:01:56 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://sanhobk.github.io/classification/</guid>
+    <description><![CDATA[Ứng dụng phân loại các giống chó, mèo]]></description>
+</item><item>
+    <title>Basic Markdown Syntax</title>
+    <link>https://sanhobk.github.io/basicmarkdownsyntax/</link>
+    <pubDate>Sun, 27 Sep 2020 17:17:40 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://sanhobk.github.io/basicmarkdownsyntax/</guid>
+    <description><![CDATA[<p>This article offers a sample of basic Markdown Syntax.</p>]]></description>
+</item></channel>
+</rss>

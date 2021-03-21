@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>AI Project - Danh mục - Hai-Blog</title>
+        <link>https://sanhobk.github.io/vi/categories/ai-project/</link>
+        <description>AI Project - Danh mục - Hai-Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>vi</language><managingEditor>sanhobkna@gmail.com (HaiNguyen)</managingEditor>
+            <webMaster>sanhobkna@gmail.com (HaiNguyen)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 02 Nov 2020 02:01:56 &#43;0700</lastBuildDate><atom:link href="https://sanhobk.github.io/vi/categories/ai-project/" rel="self" type="application/rss+xml" /><item>
+    <title>Ứng Dụng Phân Loại Các Giống Chó Mèo</title>
+    <link>https://sanhobk.github.io/vi/classification/</link>
+    <pubDate>Mon, 02 Nov 2020 02:01:56 &#43;0700</pubDate>
+    <author>Tác giả</author>
+    <guid>https://sanhobk.github.io/vi/classification/</guid>
+    <description><![CDATA[Ứng dụng phân loại các giống chó, mèo]]></description>
+</item></channel>
+</rss>

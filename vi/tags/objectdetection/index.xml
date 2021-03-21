@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>ObjectDetection - Nhãn - Hai-Blog</title>
+        <link>https://sanhobk.github.io/vi/tags/objectdetection/</link>
+        <description>ObjectDetection - Nhãn - Hai-Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>vi</language><managingEditor>sanhobkna@gmail.com (HaiNguyen)</managingEditor>
+            <webMaster>sanhobkna@gmail.com (HaiNguyen)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 07 Dec 2020 23:01:17 &#43;0700</lastBuildDate><atom:link href="https://sanhobk.github.io/vi/tags/objectdetection/" rel="self" type="application/rss+xml" /><item>
+    <title>YOLO Và Các Thuật toán Object Detection</title>
+    <link>https://sanhobk.github.io/vi/objectdetectionyolo/</link>
+    <pubDate>Mon, 07 Dec 2020 23:01:17 &#43;0700</pubDate>
+    <author>Tác giả</author>
+    <guid>https://sanhobk.github.io/vi/objectdetectionyolo/</guid>
+    <description><![CDATA[Tìm hiểu các thuật toán Object Detection, cụ thể với YOLO]]></description>
+</item></channel>
+</rss>

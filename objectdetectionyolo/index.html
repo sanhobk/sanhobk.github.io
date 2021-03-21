@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>YOLO Và Các Thuật toán Object Detection - Hai-Blog</title><meta name="Description" content="Tìm hiểu các thuật toán Object Detection, cụ thể với YOLO"><meta property="og:title" content="YOLO Và Các Thuật toán Object Detection" />
+<meta property="og:description" content="Tìm hiểu các thuật toán Object Detection, cụ thể với YOLO" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sanhobk.github.io/objectdetectionyolo/" />
+<meta property="og:image" content="https://sanhobk.github.io/objectdetectionyolo/x.jpg"/>
+<meta property="article:published_time" content="2020-12-07T23:01:17+07:00" />
+<meta property="article:modified_time" content="2020-12-07T23:01:17+07:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sanhobk.github.io/objectdetectionyolo/x.jpg"/>
+<meta name="twitter:title" content="YOLO Và Các Thuật toán Object Detection"/>
+<meta name="twitter:description" content="Tìm hiểu các thuật toán Object Detection, cụ thể với YOLO"/>
+<meta name="application-name" content="San Hô">
+<meta name="apple-mobile-web-app-title" content="San Hô"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://sanhobk.github.io/objectdetectionyolo/" /><link rel="prev" href="https://sanhobk.github.io/classification/" /><link rel="next" href="https://sanhobk.github.io/ann/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "YOLO Và Các Thuật toán Object Detection",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sanhobk.github.io\/objectdetectionyolo\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/sanhobk.github.io\/objectdetectionyolo\/x.jpg",
+                            "width":  720 ,
+                            "height":  540 
+                        }],"genre": "posts","keywords": "AI, Deep Learning, Machine Learning, YOLO, ObjectDetection","wordcount":  3475 ,
+        "url": "https:\/\/sanhobk.github.io\/objectdetectionyolo\/","datePublished": "2020-12-07T23:01:17+07:00","dateModified": "2020-12-07T23:01:17+07:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/sanhobk.github.io\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  528 
+                }},"author": {
+                "@type": "Person",
+                "name": "Hải Nguyễn"
+            },"description": "Tìm hiểu các thuật toán Object Detection, cụ thể với YOLO"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Hai-Blog"><span class="header-title-pre"><i class='far fa-smile fa-fw'></i></span>San Hô</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/categories/documentation/"> Docs </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/sanhobk" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="Select Language">English<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/objectdetectionyolo/" selected>English</option><option value="/vi/objectdetectionyolo/">Vietnamese</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Hai-Blog"><span class="header-title-pre"><i class='far fa-smile fa-fw'></i></span>San Hô</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/categories/documentation/" title="">Docs</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/sanhobk" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">English<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/objectdetectionyolo/" selected>English</option><option value="/vi/objectdetectionyolo/">Vietnamese</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">YOLO Và Các Thuật toán Object Detection</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/sanhobk" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Hải Nguyễn</a></span>&nbsp;<span class="post-category">included in <a href="/categories/ai-knowledge/"><i class="far fa-folder fa-fw"></i>AI knowledge</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-12-07">2020-12-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3475 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;17 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/objectdetectionyolo/x.jpg"
+        data-srcset="/objectdetectionyolo/x.jpg, /objectdetectionyolo/x.jpg 1.5x, /objectdetectionyolo/x.jpg 2x"
+        data-sizes="auto"
+        alt="/objectdetectionyolo/x.jpg"
+        title="Tìm hiểu các thuật toán Object Detection, cụ thể với YOLO" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-gii-thiu-v-object-detection-v-thut-ton">1. Giới thiệu về Object Detection và thuật toán</a>
+      <ul>
+        <li><a href="#a-object-detection-l-g">A. Object Detection là gì?</a></li>
+        <li><a href="#b-cc-thut-ton-ca-object-detection">B. Các thuật toán của Object Detection</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-yolo---you-only-look-once">2. YOLO - You Only Look Once</a>
+      <ul>
+        <li><a href="#a-u-im">A. Ưu điểm:</a></li>
+        <li><a href="#b-nhc-im">B. Nhược điểm:</a></li>
+        <li><a href="#c-cch-thc-hot-ng-ca-yolo-nh-th-no">C. Cách Thức Hoạt Động Của YOLO Như Thế Nào?</a>
+          <ul>
+            <li><a href="#c1-gii-m-bounding-box">C.1 Giải Mã Bounding Box</a></li>
+            <li><a href="#c2-intersection-over-union-iou-and-non-max-suppression">C.2 Intersection over Union (IoU) and Non-Max Suppression</a></li>
+            <li><a href="#c3-anchor-box">C.3 Anchor Box</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="object-detection-and-yolo">Object Detection And YOLO</h1>
+<h2 id="1-gii-thiu-v-object-detection-v-thut-ton">1. Giới thiệu về Object Detection và thuật toán</h2>
+<h3 id="a-object-detection-l-g">A. Object Detection là gì?</h3>
+<p><strong>Objetc Detection</strong> ( Phát hiện đối tượng) là một công nghệ máy tính liên quan đến lĩnh vực Computer Vision (thị giác máy tính) và Image Processing (Xử lý ảnh) nhằm phát hiện các đối tượng trong ảnh hoặc video kỹ thuật số (chẳng hạn như con người, đồ vật, động vật, thực vật, tòa nhà&hellip;). Object Detection có rất nhiều ứng dụng trong nhiều lĩnh vực Computer Vision như nhận diện khuôn mặt, Face ID của apple, hệ thống giám sát hàng loạt của trung quốc, &hellip;</p>
+<p>Dưới đây là cái nhìn tổng quát, để cho chúng ta có thể dễ dàng thấy được Object Detection đang nằm ở đâu trong những bài toán của Computer Vision.</p>
+<p><em><strong>Image Classification:</strong></em>  nhằm mục đích gán hình ảnh cho một trong số các danh mục khác nhau (ví dụ: ô tô, chó, mèo, người, v.v.), về cơ bản nó sẽ là câu trả lời của câu hỏi &ldquo;Cái gì trong hình này?&quot;_. Một hình ảnh chỉ có một danh mục được gán cho nó.</p>
+<p><em><strong>Object Localization:</strong></em> sau đó chúng ta định vị đối tượng của mình trong hình ảnh, vì vậy câu hỏi của chúng ta lúc này chuyển thành <em>&ldquo;Nó là gì và nó ở đâu?&quot;</em> .</p>
+<p><em><strong>Object Detection:</strong></em> cung cấp các công cụ để thực hiện việc tìm kiếm tất cả các đối tượng trong một hình ảnh và vẽ cái gọi là <strong>hộp giới hạn</strong> <em><strong>(Bounding Boxes)</strong></em> xung quanh chúng. Cũng có một số tình huống mà chúng ta muốn tìm ranh giới chính xác của các đối tượng của mình trong quá trình được gọi là <strong>phân đoạn cá thể</strong> <strong>(<em><strong>instance segmentation</strong></em>)</strong>.</p>
+<p align="center"><img src="0.png"></p>
+<h3 id="b-cc-thut-ton-ca-object-detection">B. Các thuật toán của Object Detection</h3>
+<p><strong>Thuật toán Object Detection:</strong> Có 3 mô hình thuật toán chính về object detection mà chúng ta sẽ thường xuyên gặp phải:</p>
+<ul>
+<li>R-CNN và các biến thể: bao gồm R-CNN gốc, Fast R-CNN và Faster R-CNN</li>
+<li>Single Shot Detector (SSD)</li>
+<li>You only look one (YOLO)</li>
+</ul>
+<p><strong>R-CNNs</strong> là một trong những mô hình thuật toán về phát hiện đối tượng đầu tiên dựa trên deep learning và là một hình mẫu về việc nhận diện qua 2 giai đoạn:</p>
+<ul>
+<li>Trong ấn phẩm đầu tiên của R-CNN,<a href="https://arxiv.org/abs/1311.2524" target="_blank" rel="noopener noreffer"> # Rich feature hierarchies for accurate object detection and semantic segmentation</a> (tạm dịch: Hệ thống phân cấp tính năng các điểm đặc trưng để nhận đối tượng và phân đoạn ngữ nghĩa), (2013) Girshick et al. đã đề xuất một giải thuật tìm kiếm có chọn lọc nhằm tạo và trích xuất các vùng có khả năng chứa vật thể được bao bọc bởi các hộp giới hạn (gọi là boundingbox).</li>
+<li>Những vùng này sau đó được chuyển vào CNN để phân loại, cuối cùng cho chúng ta một trong những công cụ phát hiện đối tượng đầu tiên dựa trên học sâu (deep learning) .</li>
+</ul>
+<p>Vấn đề của phương pháp R-CNN bản gốc này là nó rất chậm, và nó chưa hoàn chỉnh.</p>
+<p><strong>Fast R-CNN:</strong> Girshick và các cộng sự xuất bản bài báo thứ 2 vào năm 2015, có tựa đề <a href="https://arxiv.org/abs/1504.08083" target="_blank" rel="noopener noreffer">Fast R-CNN</a> . Thuật toán Fast R-CNN đã thực hiện những cải tiến đáng kể đối với R-CNN ban đầu, cụ thể là tăng độ chính xác và giảm thời gian thực hiện, tuy nhiên nó vẫn cần một tập hợp vùng đề xuất cho mỗi ảnh.</p>
+<p><strong>Faster R-CNN:</strong> Cũng vào năm 2015, Grishick và các cộng sự tiếp tục công bố bài báo thứ 3 <a href="https://arxiv.org/abs/1506.01497" target="_blank" rel="noopener noreffer">Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks</a> (tạm dịch: R-CNN nhanh hơn: Hướng tới phát hiện đối tượng theo thời gian thực với mạng đề xuất khu vực). Đến lúc này, R-CNNs mới trở thành công cụ phát hiện đối tượng học sâu end-to-end thực sự bằng cách loại bỏ yêu cầu tìm kiếm có chọn lọc và thay vào đó dựa vào Mạng đề xuất khu vực (RPN). Đầu ra của RPN sau đó được chuyển vào thành phần R-CNN để phân loại và dán nhãn cuối cùng.
+R-CNNs có xu hướng rất chính xác, nhưng vấn đề lớn nhất với họ mạng R-CNN là tốc độ của chúng - chúng cực kỳ chậm, chỉ thu được 5 FPS trên GPU.</p>
+<p><strong>SSD và YOLO:</strong> Để tăng tốc độ cho Object Detection, hai mô hình thuật toán mới đã ra đời là SSD và YOLO, cả hai đều sử dụng chung một chiến lược, đó là: phát hiện đối tượng trong 1 giai đoạn. Nói chung, thì cả YOLO và SSD có độ chính xác kém hơn nhưng nhanh hơn đáng kể.</p>
+<p>Trong những dự án thực tế, tốc độ đóng vai trò vô cùng quan trọng, nên SSD và YOLO dần chiếm ưu thế khi khoảng cách về độ chính xác giữa chúng và mô hình nhận diện hai giai đoạn của họ mạng R-CNN ngày càng được thu hẹp.</p>
+<p>Ở bài viết này, mình sẽ tập trung nói và viết về YOLO và để dành SSD cho bài viết khác, bởi theo như mình thấy hiện tại thì YOLO khá được ưa chuộng, và nó liên tục có những bản cập nhật mới từ khi ra đời vào năm 2015, hiện tại thì YOLOv5 đang làm mưa làm gió trên các diễn đàn về AI, ML, DL,&hellip; nhờ những đột phá mới, đặc biệt là tính dễ sử dụng.</p>
+<p>So với người anh em YOLO, SSD chỉ có 2 bản là SSD 300 và SSD 500, và chưa có bản update nào kể từ khi ra mắt. Thế nhưng SSD vẫn có những ưu điểm riêng và độ hiệu quả cũng vô cùng ấn tượng.</p>
+<p>Theo lẽ thường thì chúng ta sẽ phân tích ưu nhược điểm của YOLO sau khi nghiên cứu mô hình và cấu trúc mạng mà nó sử dụng, nhưng cá nhân mình thường nhìn vào kết quả và cách sử dụng trước sau đó mới tiến hành nghiên cứu chi tiết mô hình và cấu trúc của nó, điều này giúp mình rút ngắn kha khá thời gian khi làm một project. Việc học, làm như thế này cũng cho mình một cái nhìn tổng quát về những thứ mình đang làm, trước khi tìm hiểu sâu hơn vào một ví dụ cụ thể.</p>
+<p>Vậy ưu và nhược điểm của YOLO là gì và khi nào thì nên sử dụng nó?</p>
+<h2 id="2-yolo---you-only-look-once">2. YOLO - You Only Look Once</h2>
+<p>Như đã nói ở trên YOLO là mô hình nhận diện một giai đoạn, nghĩa là coi việc phát hiện đối tượng như một bài toán hồi quy, lấy một hình ảnh đầu vào nhất định và đồng thời học tọa độ hộp giới hạn cùng xác suất nhãn lớp tương ứng.</p>
+<h3 id="a-u-im">A. Ưu điểm:</h3>
+<p>Những ưu điểm chính của YOLO:</p>
+<ol>
+<li>Nhanh chóng và chính xác</li>
+<li>Gọn nhẹ</li>
+<li>Mã nguồn mở (Open source)</li>
+<li>Bạn có thể dễ dàng đánh đổi giữa tốc độ và độ chính xác chỉ bằng cách thay đổi kích thước của mô hình, không cần đào tạo lại!</li>
+</ol>
+<h3 id="b-nhc-im">B. Nhược điểm:</h3>
+<p>Những nhược điểm chính của YOLO:</p>
+<ol>
+<li>Nhận diện chưa tốt nếu vật thể nhỏ đến rất nhỏ</li>
+<li>YOLO khó nhận diện những object nằm gần nhau</li>
+</ol>
+<p>Lý do của những hạn chế này là do chính thuật toán của YOLO mang lại:</p>
+<ul>
+<li>Bộ phát hiện đối tượng YOLO chia hình ảnh đầu vào thành một mạng lưới SxS trong đó mỗi ô trong lưới chỉ dự đoán một đối tượng duy nhất.</li>
+<li>Nếu tồn tại nhiều đối tượng nhỏ trong một ô thì YOLO sẽ không thể phát hiện chúng, cuối cùng dẫn đến việc phát hiện đối tượng bị bỏ sót.</li>
+</ul>
+<p><em><strong>Do đó, nếu bạn biết tập dữ liệu của mình bao gồm nhiều đối tượng nhỏ được nhóm gần nhau thì bạn không nên sử dụng bộ dò đối tượng YOLO.</strong></em></p>
+<p>Về các đối tượng nhỏ, Faster R-CNN có xu hướng hoạt động tốt nhất; tuy nhiên, nó cũng là chậm nhất.</p>
+<p>SSD cũng có thể được sử dụng ở đây, vấn đề SSD cũng có thể gặp khó khăn với các vật thể nhỏ hơn (nhưng không nhiều như YOLO).</p>
+<p>SSD cũng thường đem lại sự cân bằng tốt về tốc độ và độ chính xác.</p>
+<p>Dưới đây là một số kinh nghiệm khi chọn mô hình nhận diện đối tượng cho dự án của bạn:</p>
+<ul>
+<li>Nếu bạn cần phát hiện các vật thể nhỏ và tốc độ không phải là vấn đề đáng lo ngại, bạn nên dùng Faster R-CNN.</li>
+<li>Nếu tốc độ là điều tối quan trọng, bạn nên sử dụng YOLO.</li>
+<li>Nếu bạn cần sự cân bằng hoàn hảo giữa Faster R-CNN và YOLO hãy chọn SSD.</li>
+</ul>
+<p>Dưới đây là một số hình ảnh so sánh giữa YOLO và các mô hình mạng khác với bộ dữ liệu MS COCO:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="1.png"
+        data-srcset="/objectdetectionyolo/1.png, 1.png 1.5x, /objectdetectionyolo/1.png 2x"
+        data-sizes="auto"
+        alt="/objectdetectionyolo/1.png"
+        title="graph2" /></p>
+<p>mAP-50, AP: Đơn vị đo độ chính xác
+ms: mili giây</p>
+<p>Và bây giờ chúng ta hãy cùng tìm hiểu xem YOLO hoạt động như thế nào?</p>
+<h3 id="c-cch-thc-hot-ng-ca-yolo-nh-th-no">C. Cách Thức Hoạt Động Của YOLO Như Thế Nào?</h3>
+<ol>
+<li>
+<p>Đầu tiên YOLO chụp ảnh đầu vào:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-15-17-43-42.png"></p>
+</li>
+<li>
+<p>Sau đó, chia hình ảnh đầu vào thành các ảnh nhỏ hơn dạng lưới (giả sử là lưới 3 X 3):</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-15-17-46-32.png"></p>
+</li>
+<li>
+<p>Phân loại và Localization hình ảnh được áp dụng trên mỗi ô lưới. Sau đó, YOLO dự đoán các hộp giới hạn và xác suất lớp tương ứng của chúng cho các đối tượng (tất nhiên là nếu có).</p>
+</li>
+</ol>
+<p>Khá đơn giản, phải không :D? Hãy chia nhỏ từng bước để hiểu chi tiết hơn về những gì chúng ta vừa học.
+Chúng ta cần chuyển dữ liệu được gắn nhãn vào mô hình để huấn luyện nó. Giả sử chúng ta đã chia hình ảnh thành một lưới kích thước 3 X 3 và có tổng cộng 3 lớp mà chúng ta muốn các đối tượng được phân loại. Giả sử các nhãn học lần lượt là Người đi bộ, Xe ô tô và Xe máy. Vì vậy, đối với mỗi ô lưới, nhãn <em>y</em> sẽ là một vectơ tám chiều:</p>
+<p align="center"><img src="3.jpg"></p>
+<p>Chú thích:</p>
+<ul>
+<li>pc xác định xem một đối tượng có trong ô lưới hay không (nó là xác suất)</li>
+<li>bx , by , bh , bw chỉ định hộp giới hạn (bounding box) nếu có một đối tượng</li>
+<li>c1 , c2 , c3 đại diện cho các lớp. Vì vậy, nếu đối tượng là một chiếc ô tô, c2 sẽ là 1 và c1 &amp; c3 sẽ là 0, v.v&hellip;</li>
+</ul>
+<p>Giả sử ta chọn ô lưới đầu tiên từ ví dụ trên:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-15-18-08-47.png"></p>
+<p>Vì không có đối tượng nào trong ô lưới này, pc sẽ bằng 0 và nhãn y cho ô lưới này sẽ là:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-15-18-11-15.png"></p>
+<p>&lsquo;?&rsquo; ở đây có nghĩa là bx, by, bh, bw, c1 , c2 và c3 chứa những gì không quan trọng vì không có đối tượng nào trong ô lưới. Hãy lấy một ô lưới khác trong đó chúng ta có một chiếc ô tô (c2 = 1):</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-15-18-15-50.png"></p>
+<p>Trước khi chúng ta viết nhãn y cho ô lưới này, điều quan trọng trước tiên là phải hiểu cách YOLO quyết định liệu thực sự có một đối tượng trong ô lưới hay không. Trong hình trên, có hai đối tượng (hai ô tô), vì vậy YOLO sẽ lấy điểm trung tâm của hai đối tượng này và các đối tượng này sẽ được gán vào lưới chứa điểm trung tâm của chúng. Nhãn y cho ô lưới chứa ô tô bên trái sẽ là:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-15-18-27-25.png"></p>
+<p>Vì có một đối tượng trong ô lưới này, pc sẽ bằng 1. bx , by , bh , bw sẽ được tính liên quan đến ô lưới cụ thể mà chúng ta đang xử lý. Vì ô tô là hạng thứ hai nên c2 = 1 và c1 và c3 = 0. Vì vậy, với mỗi ô lưới trong số 9 ô lưới, chúng ta sẽ có một vectơ đầu ra tám chiều. Đầu ra này sẽ có hình dạng 3 X 3 X 8.
+Vì vậy, bây giờ chúng ta có một hình ảnh đầu vào và đó là vector mục tiêu tương ứng. Sử dụng ví dụ trên (hình ảnh đầu vào 100 X 100 X 3, đầu ra 3 X 3 X 8), mô hình của chúng ta sẽ được đào tạo như sau:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-15-18-46-10.png"></p>
+<p>(!): <em>Cho những bạn chưa biết thì giai đoạn nằm giữa từ Input đến Ouput, chính là mạng thần kinh tích chập CNN (Convolutional neural network), nó mô phỏng lại mạng neuron thần kinh não người.</em></p>
+<p>Để cho mọi thứ trở nên đơn giản hơn, mình đã giải thích ví dụ trên bằng cách sử dụng lưới 3 X 3, nhưng hầu hết trong các tình huống thực tế, chúng ta sẽ phải sử dụng các lưới lớn hơn (có lẽ là 19 X 19).</p>
+<p>Ngay cả khi một đối tượng (object) nó trải dài ra nhiều hơn một ô lưới thì nó vẫn sẽ chỉ được gán cho một ô lưới duy nhất mà điểm giữa của nó nằm ở đó. Chúng ta có thể giảm khả năng nhiều đối tượng xuất hiện trong cùng một ô lưới bằng cách tăng số lượng ô nhiều hơn (ví dụ: 19 X 19).</p>
+<p>Mình rất hi vọng, đọc đến đây thì những bạn chưa từng tiếp cận AI, ML&hellip; cũng có thể hiểu đại khái 80-90 %.
+Cùng nhìn lại một chút, xem còn những gì chưa giải đáp không nhỉ? dài thực sự :D.
+À cái đống bx, by, bh, bw chỉ định hộp giới hạn, hộp giới hạn hay bounding box - cái khung màu đỏ mà các bạn thấy, cái đống hộp xanh, đỏ, tím, vàng này thú vị lắm, cùng giải mã chúng thôi!</p>
+<h4 id="c1-gii-m-bounding-box">C.1 Giải Mã Bounding Box</h4>
+<p>Như mình đã đề cập trước đó bx, by, bh và bw có mối liên hệ tới ô lưới mà chúng ta đang xử lý cụ thể là chỉ định bounding box. Cùng tìm hiểu nó qua một ví dụ. Hãy xem xét ô lưới chứa ô tô bên phải trong ảnh:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-15-19-23-07.png"></p>
+<p>Nhãn y cho ô lưới này sẽ là:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-15-18-27-25.png"></p>
+<p>pc = 1 vì có một đối tượng trong lưới này và vì nó là một chiếc ô tô nên c2 = 1. Bây giờ, chúng ta hãy xem cách quyết định bx , by , bh và bw . Trong YOLO, tọa độ được gán cho tất cả các ô lưới là:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-15-19-35-31.png"></p>
+<p>bx , by là tọa độ x và y của trung tâm vật thể đối với ô lưới này. Trong trường hợp này, nó sẽ là (khoảng) bx = 0,4 và by = 0,3:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-15-19-39-51.png"></p>
+<p>bh là tỷ số giữa chiều cao của ô giới hạn (ô màu đỏ trong ví dụ trên) với chiều cao của ô lưới tương ứng, trong trường hợp của chúng ta là khoảng 0,9. Vậy, bh = 0,9. bw là tỷ số giữa chiều rộng của ô giới hạn với chiều rộng của ô lưới. Vì vậy, bw = 0,5 (xấp xỉ). Nhãn y cho lưới này sẽ là:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-16-12-44-34.png"></p>
+<p>Lưu ý ở đây rằng bx và by sẽ luôn nằm trong khoảng từ 0 đến 1 vì điểm giữa sẽ luôn nằm trong ô lưới. Trong khi bh và bw có thể nhiều hơn 1 trong trường hợp kích thước của hộp giới hạn lớn hơn kích thước của ô lưới.
+Trong phần tiếp theo, chúng ta sẽ xem xét những ý tưởng để cải thiện hiệu suất của thuật toán này.</p>
+<h4 id="c2-intersection-over-union-iou-and-non-max-suppression">C.2 Intersection over Union (IoU) and Non-Max Suppression</h4>
+<p>Có thể bạn sẽ thắc mắc: &ldquo;Cái tiêu đề gì khó hiểu quá :( ?&rdquo; , mình cũng chẳng biết dịch sang tiếng việt sao cho chuẩn, thôi thì&hellip; Lại thêm một ví dụ nữa cho dễ hiểu hơn, đầu tiên là về <strong>IoU</strong> cùng xem xét hình ảnh dưới đây nhé :D:
+<strong>IoU:</strong></p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-16-13-07-50.png"></p>
+<p>Mình sẽ giải thích một chút, ở đây, hộp màu đỏ là hộp giới hạn thực tế (chỉ định bounding box chạy bằng cơm) còn hộp màu xanh là hộp giới hạn dự đoán. Làm thế nào chúng ta có thể quyết định liệu đó có phải là một dự đoán tốt hay không? IoU hay Intersection over Union sẽ tính toán diện tích của phần giao nhau trên liên kết của hai hộp này. Khu vực đó sẽ là:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-16-13-12-02.png"></p>
+<p>IoU = Diện tích intersection / Diện tích union, tức là:</p>
+<p>IoU = Diện tích ô màu vàng / Diện tích ô màu xanh lá cây.
+Nếu IoU lớn hơn 0,5, chúng ta có thể cho rằng đây là một dự đoán đủ tốt. Nhưng đây là một ngưỡng tuỳ ý, bạn có thể chọn một ngưỡng khác cho phù hợp với bài toán của bạn.
+Có một kỹ thuật nữa có thể cải thiện đáng kể đầu ra của YOLO đó là Non-Max Suppression.</p>
+<p>Một trong những vấn đề phổ biến nhất với các thuật toán Object Detection là thay vì chỉ phát hiện đối tượng một lần, thì chúng có thể phát hiện đối tượng nhiều lần. Hãy xem hình ảnh dưới đây:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-16-13-32-40.png"></p>
+<p><strong>Non-Max Suppression:</strong> Đây là một thuật toán hay và khá quan trọng, chính bản thân mình cũng từng gặp vấn đề này trong một dự án liên quan đến nhận diện lỗi trong bảng mạch điện tử, kỹ thuật này đã giúp mình rất nhiều. Hãy cùng xem cách nó hoạt động như thế nào (mình sẽ chỉ nói sơ qua để tránh lệch trọng tâm bài viết).</p>
+<ol>
+<li>Hãy tưởng tượng, mô hình YOLO của bạn phát hiện được rất nhiều box, hay còn gọi là proposal box, ta sẽ có một tập hợp proposal box. lấy ra một proposal box có pc lớn nhất (bạn còn nhớ pc là gì chứ? nếu không nhớ mình sẽ nhắc lại, pc là xác suất để một object xuất hiện trong proposal box). Trong hình dưới 0,9 là xác suất cao nhất, vì vậy proposal box có pc = 0,9 sẽ được chọn đầu tiên:</li>
+</ol>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-17-12-08-14.png"></p>
+<ol start="2">
+<li>Bây giờ chúng ta sẽ lấy nó so sánh với các proposal box còn lại, chọn một ngưỡng N = 0,5, tính tỉ lệ IoU của proposal box ta đã chọn với proposal box còn lại, mình lấy ví dụ là hộp có pc =0,6. giả sử ta tính được IoU = 0,6. lớn hơn ngưỡng mà chúng ta đã chọn, ta có thể loại bỏ nó khỏi tập hợp proposal box.</li>
+</ol>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-17-12-11-35.png"></p>
+<ol start="3">
+<li>Lặp đi lặp lại bước 2 và chúng ta có bounding box duy nhất.</li>
+</ol>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-17-12-21-31.png"></p>
+<p>Có một phương pháp khác mà chúng ta có thể sử dụng để cải thiện hiệu suất của thuật toán YOLO - hãy cùng khám phá nhé :D.</p>
+<h4 id="c3-anchor-box">C.3 Anchor Box</h4>
+<p>Chúng ta đã thấy rằng mỗi ô lưới chỉ có thể xác định một đối tượng. Nhưng nếu có nhiều đối tượng trong một ô lưới duy nhất thì sao? Điều đó thường xảy ra trong thực tế. Và điều cho ra đời một khái niệm Anchor. Hãy xem xét hình ảnh sau đây, được chia thành lưới 3 X 3:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-17-13-18-38.png"></p>
+<p>Hãy nhớ cách chúng ta đã gán một đối tượng vào lưới? Chúng ta lấy điểm giữa của đối tượng và dựa trên vị trí của nó, gán đối tượng vào ô lưới tương ứng. Trong ví dụ trên, điểm giữa của cả hai đối tượng nằm trong cùng một ô lưới. Xem hình ảnh minh hoạ:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-17-13-20-41.png"></p>
+<p>Chúng ta sẽ chỉ nhận được một trong hai hộp, cho ô tô hoặc cho người. Nhưng nếu chúng ta sử dụng anchor box, chúng ta có thể xuất cả hai hộp! làm thế nào để chúng ta làm được? Đầu tiên, chúng ta xác định trước hai hình dạng khác nhau được gọi là anchor box ( anchor box shape). Bây giờ, đối với mỗi ô lưới, thay vì có một đầu ra, chúng ta sẽ có hai đầu ra. Chúng ta luôn có thể tăng số lượng hộp neo. Mình đã lấy hai ở đây để có một ví dụ dễ hiểu:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-17-13-36-28.png"></p>
+<p>Nhãn y sẽ là:</p>
+<p align="center"><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2018/12/Screenshot-from-2018-11-17-13-33-31.png"></p>
+<p>8 hàng đầu tiên thuộc anchor box 1 và 8 hàng còn lại thuộc anchor box 2. Đầu ra trong trường hợp này, thay vì 3 X 3 X 8 (sử dụng lưới 3 X 3 và 3 lớp), sẽ là 3 X 3 X 16 (vì chúng ta đang sử dụng 2 Anchor).</p>
+<p>Bài viết này khá là dài rồi, nên có lẽ mình sẽ tạm dừng tại đây. Ở những bài sau có lẽ mình sẽ viết hướng dẫn về cách áp dụng YOLO vào những dự án thực tế. Mình sẽ làm một project nhỏ để demo.</p>
+<p>Hi vọng bạn thích bài viết này.</p>
+<p>Tài Liệu Tham Khảo:</p>
+<ol>
+<li><a href="https://www.pyimagesearch.com/2018/11/12/yolo-object-detection-with-opencv/?fbclid=IwAR2WdzrWvfgY4E6JMekrLohBJRGE11sgEB1plfWPqmUc5torIQbmc7KDVIc" target="_blank" rel="noopener noreffer">https://www.pyimagesearch.com/yolo-object-detection-with-opencv</a></li>
+<li><a href="https://www.coursera.org/lecture/convolutional-neural-networks/anchor-boxes-yNwO0">https://www.coursera.org/lecture/convolutional-neural-networks/anchor-boxes-yNwO0</a></li>
+<li><a href="https://www.coursera.org/lecture/convolutional-neural-networks/non-max-suppression-dvrjH">https://www.coursera.org/lecture/convolutional-neural-networks/non-max-suppression-dvrjH</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Object_detection">https://en.wikipedia.org/wiki/Object_detection</a></li>
+</ol></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-12-07</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/objectdetectionyolo/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://sanhobk.github.io/objectdetectionyolo/" data-hashtag="AI"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://sanhobk.github.io/objectdetectionyolo/" data-title="YOLO Và Các Thuật toán Object Detection"><i class="fab fa-hacker-news fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/ai/">AI</a>,&nbsp;<a href="/tags/deep-learning/">Deep Learning</a>,&nbsp;<a href="/tags/machine-learning/">Machine Learning</a>,&nbsp;<a href="/tags/yolo/">YOLO</a>,&nbsp;<a href="/tags/objectdetection/">ObjectDetection</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/classification/" class="prev" rel="prev" title="Ứng Dụng Phân Loại Các Giống Chó, Mèo"><i class="fas fa-angle-left fa-fw"></i>Ứng Dụng Phân Loại Các Giống Chó, Mèo</a>
+            <a href="/ann/" class="next" rel="next" title="Tổng Quan Về Neural Network">Tổng Quan Về Neural Network<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="fb-root" class="comment"></div>
+            <div
+                class="fb-comments"
+                data-href="https://sanhobk.github.io/objectdetectionyolo/"
+                data-width="100%"
+                data-numposts="10"
+            ></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/"></a>Facebook</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">HaiNguyen</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v5.0&amp;appId=&amp;autoLogAppEvents=1" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.2.0/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"algoliaAppID":"8DPW6V4XGR","algoliaIndex":"index.en","algoliaSearchKey":"6d651aa957c8afdcc75a4d9d614e8d42","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

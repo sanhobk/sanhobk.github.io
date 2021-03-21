@@ -1,0 +1,8 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tài Liệu - Danh mục - Hai-Blog</title>
+        <link>https://sanhobk.github.io/vi/categories/documentation/</link>
+        <description>Tài Liệu - Danh mục - Hai-Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>vi</language><managingEditor>sanhobkna@gmail.com (HaiNguyen)</managingEditor>
+            <webMaster>sanhobkna@gmail.com (HaiNguyen)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://sanhobk.github.io/vi/categories/documentation/" rel="self" type="application/rss+xml" /></channel>
+</rss>

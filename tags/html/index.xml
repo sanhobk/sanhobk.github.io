@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>HTML - Tag - Hai-Blog</title>
+        <link>https://sanhobk.github.io/tags/html/</link>
+        <description>HTML - Tag - Hai-Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>sanhobkna@gmail.com (HaiNguyen)</managingEditor>
+            <webMaster>sanhobkna@gmail.com (HaiNguyen)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 27 Sep 2020 17:17:40 &#43;0700</lastBuildDate><atom:link href="https://sanhobk.github.io/tags/html/" rel="self" type="application/rss+xml" /><item>
+    <title>Basic Markdown Syntax</title>
+    <link>https://sanhobk.github.io/basicmarkdownsyntax/</link>
+    <pubDate>Sun, 27 Sep 2020 17:17:40 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://sanhobk.github.io/basicmarkdownsyntax/</guid>
+    <description><![CDATA[<p>This article offers a sample of basic Markdown Syntax.</p>]]></description>
+</item></channel>
+</rss>
